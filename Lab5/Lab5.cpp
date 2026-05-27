@@ -57,7 +57,21 @@ void create_bitmap(ALLEGRO_BITMAP* bmp[], ALLEGRO_DISPLAY* display)
     for (int i = 0; i < 4; i++)
     {
         bmp[i] = al_create_bitmap(64, 64);
+        al_set_target_bitmap(bmp[i]);
+
+        al_clear_to_color(al_map_rgb(0, 0, 0));
+
+        al_draw_filled_ellipse(
+            32, 40,
+            20, 10,
+            al_map_rgb(255, 0, 255));
+
+        al_draw_filled_circle(
+            32, 28,
+            10,
+            al_map_rgb(0, 255, 255));
     }
 
     al_set_target_backbuffer(display);
+
 }
