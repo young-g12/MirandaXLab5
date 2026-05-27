@@ -40,11 +40,18 @@ int main()
 
         al_clear_to_color(al_map_rgb(0, 0, 0));
 
+        al_draw_bitmap(bmp[0], 50, 50, 0);
+        al_draw_bitmap(bmp[1], 200, 50, 0);
+        al_draw_bitmap(bmp[2], 350, 50, 0);
+        al_draw_bitmap(bmp[3], 500, 50, 0);
+
         al_flip_display();
     }
 
     for (int i = 0; i < 4; i++)
+    {
         al_destroy_bitmap(bmp[i]);
+}
 
     al_destroy_event_queue(queue);
     al_destroy_display(display);
@@ -70,6 +77,23 @@ void create_bitmap(ALLEGRO_BITMAP* bmp[], ALLEGRO_DISPLAY* display)
             32, 28,
             10,
             al_map_rgb(0, 255, 255));
+
+        al_draw_filled_rectangle(
+            28, 5,
+            36, 20,
+            al_map_rgb(150, 150, 150));
+
+        al_draw_line(
+            32, 5,
+            32, 0,
+            al_map_rgb(255, 255, 255),
+            2);
+
+        al_draw_filled_triangle(
+            28, 5,
+            36, 5,
+            32, 0,
+            al_map_rgb(255, 0, 0));
     }
 
     al_set_target_backbuffer(display);
