@@ -1,6 +1,8 @@
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_primitives.h>
 
+void create_bitmap(ALLEGRO_BITMAP* bmp[], ALLEGRO_DISPLAY* display);
+
 int main()
 {
     ALLEGRO_DISPLAY* display = NULL;
@@ -9,11 +11,15 @@ int main()
     const int WIDTH = 640;
     const int HEIGHT = 480;
 
+    ALLEGRO_BITMAP* bmp[4] = { NULL,NULL,NULL,NULL };
+
     al_init();
     al_init_primitives_addon();
     al_install_keyboard();
 
     display = al_create_display(WIDTH, HEIGHT);
+
+    create_bitmap(bmp, display);
 
     queue = al_create_event_queue();
     al_register_event_source(queue, al_get_keyboard_event_source());
@@ -37,8 +43,21 @@ int main()
         al_flip_display();
     }
 
+    for (int i = 0; i < 4; i++)
+        al_destroy_bitmap(bmp[i]);
+
     al_destroy_event_queue(queue);
     al_destroy_display(display);
 
     return 0;
+}
+
+void create_bitmap(ALLEGRO_BITMAP* bmp[], ALLEGRO_DISPLAY* display)
+{
+    for (int i = 0; i < 4; i++)
+    {
+        bmp[i] = al_create_bitmap(64, 64);
+    }
+
+    al_set_target_backbuffer(display);
 }
